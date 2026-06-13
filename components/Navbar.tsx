@@ -27,6 +27,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
+    <>
     <motion.nav
       aria-label="Main navigation"
       initial={false}
@@ -88,8 +89,13 @@ export default function Navbar() {
           <Menu size={24} strokeWidth={1.5} />
         </button>
       </div>
+    </motion.nav>
 
-      {/* Mobile full-screen overlay */}
+      {/* Mobile full-screen overlay — rendered as a SIBLING of <nav>, not a
+          child. The nav carries a backdrop-filter (backdrop-blur), and any
+          non-`none` backdrop-filter makes it the containing block for its
+          fixed-position descendants — which would clamp this overlay to the
+          ~62px navbar box instead of the full viewport. */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -97,7 +103,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex flex-col bg-canvas md:hidden"
+            className="fixed inset-0 z-[60] flex flex-col bg-canvas md:hidden"
           >
             <div className="flex items-center justify-between px-6 py-4">
               <div className="flex items-center gap-2.5">
@@ -164,6 +170,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 }

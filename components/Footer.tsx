@@ -48,7 +48,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="inline-flex min-h-[40px] items-center font-body text-sm font-light text-ink transition-colors hover:text-rosegold"
+                    className="inline-flex min-h-[44px] items-center font-body text-sm font-light text-ink transition-colors hover:text-rosegold"
                   >
                     {link.label}
                   </a>
