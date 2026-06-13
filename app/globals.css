@@ -1,0 +1,129 @@
+/* Fonts are self-hosted via next/font/google in app/layout.tsx (Cormorant +
+   Montserrat, latin + latin-ext), exposed as --font-cormorant /
+   --font-montserrat. This avoids a render-blocking external @import. */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+
+  /* Ivory Editorial tokens — mirrored from tailwind.config.ts */
+  --canvas: #faf8f5;
+  --linen: #f3efe9;
+  --putty: #ede8e1;
+  --ink: #1a1714;
+  --taupe: #7a7269;
+  --rosegold: #b8956a;
+  --mauve: #9b7fa6;
+  --border-ink: rgba(26, 23, 20, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ---------------------------------------------------------------
+   Grain / paper texture — a 200x200 repeating fractalNoise SVG.
+   Layered over the warm ivory canvas at very low opacity so the
+   light surfaces read as printed cream stock rather than flat.
+----------------------------------------------------------------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.03;
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Reusable grain layer for individual section surfaces. Drop a
+   <span className="grain-layer" aria-hidden /> inside a relative box. */
+.grain-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='ng'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ng)'/%3E%3C/svg%3E");
+}
+
+/* Custom scrollbar — slim, rose-gold thumb on warm putty track */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--putty);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rosegold);
+  border-radius: 0;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rosegold) var(--putty);
+}
+
+/* Selection */
+::selection {
+  background: rgba(184, 149, 106, 0.25);
+  color: var(--ink);
+}
+
+/* Keep interactive content above the fixed grain overlay */
+main,
+header,
+nav,
+footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Shimmer skeleton fill for image placeholders */
+.shimmer {
+  background-image: linear-gradient(
+    100deg,
+    #ddd8d0 30%,
+    #ebe7e0 50%,
+    #ddd8d0 70%
+  );
+  background-size: 200% 100%;
+}
+
+/* Snap-scroll utility for the mobile testimonials row */
+.snap-x-row {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.snap-start {
+  scroll-snap-align: start;
+}
+
+/* Sepia-toned map embed to match the ivory palette */
+.map-ivory {
+  filter: grayscale(100%) sepia(20%) contrast(0.9);
+}
