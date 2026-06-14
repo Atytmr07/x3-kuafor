@@ -3,13 +3,13 @@
 import { Fragment, useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, Star } from "lucide-react";
+import { ArrowUpRight, Phone, Star } from "lucide-react";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { IMAGES, SITE } from "@/lib/site";
 
 // Mixed roman + italic kinetic headline; "atölyesi" gets the rose-gold accent.
 const LINES: { cls: string; words: string[] }[] = [
-  { cls: "text-[0.34em] not-italic font-medium uppercase tracking-[0.06em]", words: ["Antalya'nın"] },
+  { cls: "text-[0.3em] not-italic font-medium uppercase tracking-[0.14em] text-taupe", words: ["Antalya'nın"] },
   { cls: "italic", words: ["en", "seçkin"] },
   { cls: "italic", words: ["saç", "atölyesi."] },
 ];
@@ -104,21 +104,51 @@ export default function Hero() {
               variants={container}
               initial="hidden"
               animate="visible"
-              className="order-2 flex flex-wrap items-baseline font-heading font-light leading-[0.92] tracking-[-0.02em] text-ink md:col-span-6 md:col-start-1 text-[clamp(2.9rem,7.5vw,6rem)]"
+              className="order-2 flex flex-wrap items-baseline font-heading font-normal leading-[0.88] tracking-[-0.015em] text-ink md:col-span-6 md:col-start-1 text-[clamp(3rem,7.8vw,6.5rem)]"
             >
               {LINES.map((line, li) => (
                 <Fragment key={li}>
-                  {line.words.map((w, wi) => (
-                    <motion.span
-                      key={`${li}-${wi}`}
-                      variants={word}
-                      className={`mr-[0.2em] inline-block ${line.cls} ${
-                        w === ACCENT_WORD ? "text-rosegold" : ""
-                      }`}
-                    >
-                      {w}
-                    </motion.span>
-                  ))}
+                  {line.words.map((w, wi) => {
+                    const isAccent = w === ACCENT_WORD;
+                    return (
+                      <motion.span
+                        key={`${li}-${wi}`}
+                        variants={word}
+                        className={`relative mr-[0.2em] inline-block ${line.cls} ${
+                          isAccent ? "font-medium text-rosegold" : ""
+                        }`}
+                      >
+                        {w}
+                        {isAccent && (
+                          <svg
+                            aria-hidden="true"
+                            viewBox="0 0 300 30"
+                            fill="none"
+                            preserveAspectRatio="none"
+                            className="pointer-events-none absolute -bottom-[0.04em] left-[-3%] h-[0.28em] w-[106%] overflow-visible"
+                          >
+                            <motion.path
+                              d="M4 22 C 72 31, 150 28, 220 18 C 256 13, 282 12, 296 6"
+                              stroke="#B8956A"
+                              strokeWidth={2.5}
+                              strokeLinecap="round"
+                              vectorEffect="non-scaling-stroke"
+                              initial={{
+                                pathLength: reduceMotion ? 1 : 0,
+                                opacity: reduceMotion ? 1 : 0,
+                              }}
+                              animate={{ pathLength: 1, opacity: 1 }}
+                              transition={{
+                                duration: 0.9,
+                                delay: reduceMotion ? 0 : 1.3,
+                                ease: [0.22, 1, 0.36, 1],
+                              }}
+                            />
+                          </svg>
+                        )}
+                      </motion.span>
+                    );
+                  })}
                   {li < LINES.length - 1 && (
                     <span aria-hidden className="basis-full" />
                   )}
@@ -217,12 +247,13 @@ export default function Hero() {
               </motion.a>
 
               <a
-                href={SITE.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center font-body text-sm font-light tracking-wide text-ink underline-offset-4 transition-colors hover:text-rosegold hover:underline"
+                href={SITE.phoneHref}
+                className="group inline-flex min-h-[44px] items-center gap-2.5 font-body text-sm font-light text-ink transition-colors hover:text-rosegold"
               >
-                {SITE.instagramHandle}
+                <Phone size={16} strokeWidth={1.5} className="text-rosegold" />
+                <span className="border-b border-ink/15 pb-0.5 transition-colors duration-300 group-hover:border-rosegold">
+                  Bizi Arayın
+                </span>
               </a>
             </motion.div>
 
