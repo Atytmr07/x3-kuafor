@@ -42,7 +42,9 @@ export const NAV_LINKS = [
  * placeholders. Swap the URLs for the studio's own shots when available.
  */
 export const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1100&q=80",
+  hero: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1100&q=85",
+  heroInterior:
+    "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1100&q=80",
   gallery: [
     {
       src: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80",
