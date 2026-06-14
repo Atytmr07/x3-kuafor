@@ -42,7 +42,11 @@ export const NAV_LINKS = [
  * placeholders. Swap the URLs for the studio's own shots when available.
  */
 export const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=1100&q=85",
+  // Main hero — stylist at work (the atelier in action).
+  hero: "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1000&q=85",
+  // Layered detail shot — blow-dry / styling close-up.
+  heroDetail:
+    "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=700&q=85",
   heroInterior:
     "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1100&q=80",
   gallery: [
