@@ -84,7 +84,7 @@ export default function Hero() {
       {/* ───── Main hero content ───── */}
       <div className="relative z-10 flex flex-1 flex-col justify-start pt-24 md:justify-center md:pt-28">
         <div className="mx-auto w-full max-w-7xl px-6 md:px-10">
-          <div className="flex flex-col gap-8 md:grid md:grid-cols-12 md:items-center md:gap-x-12 md:gap-y-5">
+          <div className="flex flex-col items-center gap-8 text-center md:grid md:grid-cols-12 md:items-center md:gap-x-12 md:gap-y-5 md:text-left">
             {/* Masthead meta bar */}
             <motion.div
               {...fadeUp(0)}
@@ -104,7 +104,7 @@ export default function Hero() {
               variants={container}
               initial="hidden"
               animate="visible"
-              className="order-2 flex flex-wrap items-baseline font-heading font-normal leading-[0.88] tracking-[-0.015em] text-ink md:col-span-6 md:col-start-1 text-[clamp(3rem,7.8vw,6.5rem)]"
+              className="order-2 flex flex-wrap items-baseline justify-center gap-x-[0.2em] font-heading font-normal leading-[0.9] tracking-[-0.015em] text-ink md:col-span-6 md:col-start-1 md:justify-start text-[clamp(2.5rem,8.5vw,6.5rem)]"
             >
               {LINES.map((line, li) => (
                 <Fragment key={li}>
@@ -114,7 +114,7 @@ export default function Hero() {
                       <motion.span
                         key={`${li}-${wi}`}
                         variants={word}
-                        className={`relative mr-[0.2em] inline-block ${line.cls} ${
+                        className={`relative inline-block ${line.cls} ${
                           isAccent ? "font-medium text-rosegold" : ""
                         }`}
                       >
@@ -159,7 +159,7 @@ export default function Hero() {
             {/* ── Layered image cluster ── */}
             <motion.div
               style={{ y: reduceMotion ? 0 : imageY }}
-              className="order-3 md:col-start-7 md:col-span-6 md:row-start-1 md:row-span-5 md:self-center"
+              className="order-3 w-full md:w-auto md:col-start-7 md:col-span-6 md:row-start-1 md:row-span-5 md:self-center"
             >
               <motion.div
                 initial={{ opacity: 0, y: reduceMotion ? 0 : 28 }}
@@ -220,7 +220,7 @@ export default function Hero() {
             {/* Subline */}
             <motion.p
               {...fadeUp(0.95)}
-              className="order-4 max-w-md font-body text-base font-light leading-relaxed text-taupe md:col-span-6 md:col-start-1 md:text-lg"
+              className="order-4 mx-auto max-w-md font-body text-base font-light leading-relaxed text-taupe md:col-span-6 md:col-start-1 md:mx-0 md:text-lg"
             >
               {SITE.taglineTr} Kesim, renk ve stil; tek bir imzada buluşuyor.
             </motion.p>
@@ -228,7 +228,7 @@ export default function Hero() {
             {/* CTA row */}
             <motion.div
               {...fadeUp(1.1)}
-              className="order-5 flex flex-col gap-4 sm:flex-row sm:items-center md:col-span-6 md:col-start-1"
+              className="order-5 flex w-full max-w-[340px] flex-col items-center gap-4 sm:max-w-none sm:flex-row sm:justify-center md:col-span-6 md:col-start-1 md:w-auto md:justify-start"
             >
               <motion.a
                 href={SITE.whatsapp}
@@ -236,7 +236,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 whileHover={reduceMotion ? undefined : { scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="group inline-flex items-center justify-center gap-2 border border-rosegold px-8 py-4 font-body text-xs font-medium uppercase tracking-[0.18em] text-rosegold transition-colors duration-[250ms] ease-out hover:bg-rosegold hover:text-canvas"
+                className="group inline-flex w-full items-center justify-center gap-2 border border-rosegold px-8 py-4 font-body text-xs font-medium uppercase tracking-[0.18em] text-rosegold transition-colors duration-[250ms] ease-out hover:bg-rosegold hover:text-canvas sm:w-auto"
               >
                 WhatsApp&apos;tan Randevu Al
                 <ArrowUpRight
